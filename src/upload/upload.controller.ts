@@ -12,8 +12,11 @@ export class UploadController {
     async uploadFile(@UploadedFile() file: Express.Multer.File) {
         const fileName = file.originalname;
         const fileBuffer = file.buffer;
-
-        await this.uploadService.upload(fileName, fileBuffer);
-        return { message: 'Arquivo enviado com sucesso.' };
+        try {
+            await this.uploadService.upload(fileName, fileBuffer);
+            return {message: 'Arquivo enviado com sucesso.'};
+        } catch {
+            return {status: 400, message: 'Falha ao salvar arquivo'}
+        }
     }
 }

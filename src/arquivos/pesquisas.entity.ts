@@ -11,10 +11,10 @@ export class Pesquisas {
     @Column({ type: 'date' })
     created_date: Date;
 
-    @Column()
+    @Column({ type: 'float', nullable: true})
     nota_1: number;
 
-    @Column()
+    @Column({ type: 'float', nullable: true})
     nota_2: number;
 
     @Column({ type: 'float', nullable: true})

@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PesquisasModule } from './arquivos/pesquisas.modules';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
     imports: [
@@ -25,7 +26,8 @@ import { PesquisasModule } from './arquivos/pesquisas.modules';
                 },
             }),
         }),
-        PesquisasModule
+        PesquisasModule, UploadModule
+
     ],
 })
 export class AppModule {}
