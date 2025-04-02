@@ -24,12 +24,15 @@
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.12",
+    "@nestjs/swagger": "^11.1.0",
     "@nestjs/typeorm": "^11.0.0",
     "@types/multer": "^1.4.12",
     "backend-great-people": "file:",
     "pg": "^8.14.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
+    "swagger-ui-dist": "^5.20.2",
+    "swagger-ui-express": "^5.0.1",
     "typeorm": "^0.3.21"
   },
   "devDependencies": {

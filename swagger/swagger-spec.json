@@ -1,0 +1,245 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/pesquisas": {
+      "get": {
+        "operationId": "PesquisasController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Lista de pesquisas retornada com sucesso"
+          }
+        },
+        "summary": "Retorna todas as pesquisas",
+        "tags": [
+          "Pesquisas"
+        ]
+      },
+      "post": {
+        "operationId": "PesquisasController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveNotasDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Pesquisa criada com sucesso"
+          }
+        },
+        "summary": "Cria uma nova pesquisa",
+        "tags": [
+          "Pesquisas"
+        ]
+      }
+    },
+    "/pesquisas/multiples": {
+      "post": {
+        "operationId": "PesquisasController_createMultiples",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SaveNotasDTO"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Pesquisa criada com sucesso"
+          }
+        },
+        "summary": "Salva multiplas pesquisas de uma vez no banco de dados",
+        "tags": [
+          "Pesquisas"
+        ]
+      }
+    },
+    "/pesquisas/{id}": {
+      "put": {
+        "operationId": "PesquisasController_edit",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveNotasDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pesquisa atualizada com sucesso"
+          }
+        },
+        "summary": "Atualiza uma pesquisa existente",
+        "tags": [
+          "Pesquisas"
+        ]
+      },
+      "delete": {
+        "operationId": "PesquisasController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pesquisa removida com sucesso"
+          }
+        },
+        "summary": "Remove uma pesquisa pelo ID",
+        "tags": [
+          "Pesquisas"
+        ]
+      }
+    },
+    "/upload": {
+      "post": {
+        "operationId": "UploadController_uploadFile",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "file"
+                ],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Arquivo a ser enviado"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Arquivo enviado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Arquivo enviado com sucesso."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Falha ao salvar arquivo",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Falha ao salvar arquivo"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Fazer upload de um arquivo para o S3",
+        "tags": [
+          "Upload"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "API Documentation",
+    "description": "Documentação das APIs de Pesquisas e Upload",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [
+    {
+      "url": "http://great-people.eba-2gmpbscy.sa-east-1.elasticbeanstalk.com"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "SaveNotasDTO": {
+        "type": "object",
+        "properties": {
+          "nome_pesquisa": {
+            "type": "string",
+            "example": "Pesquisa de mercado",
+            "description": "Nome da pesquisa."
+          },
+          "created_date": {
+            "type": "string",
+            "example": "2025-04-01",
+            "description": "Data de criação da pesquisa."
+          },
+          "nota_1": {
+            "type": "number",
+            "example": 8.5,
+            "description": "Nota 1 da pesquisa."
+          },
+          "nota_2": {
+            "type": "number",
+            "example": 7.3,
+            "description": "Nota 2 da pesquisa."
+          },
+          "media_pesquisa": {
+            "type": "number",
+            "example": 7.9,
+            "description": "Média da pesquisa."
+          }
+        },
+        "required": [
+          "nome_pesquisa",
+          "created_date"
+        ]
+      }
+    }
+  }
+}
